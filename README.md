@@ -26,7 +26,7 @@ para eventos, abrangendo todas as faixas etárias e interesses.
 
 ## Ambiente de Operação
 - **Tecnologias:** HTML, CSS, JavaScript, Node,js, ejs e express.
-- **Infraestrutura:** Hospedado na porta 2001, usando js para base de dados web.
+- **Infraestrutura:** Hospedado na porta 3001, usando js para base de dados web.
 
 ## Instalação e Configuração
 Para rodar o projeto localmente, siga os passos abaixo:
