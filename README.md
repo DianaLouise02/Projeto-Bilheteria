@@ -14,7 +14,7 @@ navegar por eventos, selecionar seus assentos e comprar ingressos de maneira rá
 
 
 ##Público-alvo
-- O site é destinado a pessoas que desejam comprar ingressos 
+- O site é destinado a pessoas que desejam comprar e vender ingressos 
 para eventos, abrangendo todas as faixas etárias e interesses.
 
 
