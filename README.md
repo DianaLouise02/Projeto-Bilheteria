@@ -1,11 +1,8 @@
-
 # Ticket Innovators
 
 ## Visão Geral do Sistema
-Este projeto é um site destinado a O Ticket Innovators é uma plataforma online
-projetada para facilitar a compra e venda de ingressos para eventos diversos, como shows, 
-Exposições e eventos esportivos . Através de uma interface  intuitiva os usuários podem cadastrar ingresssos,
-navegar por eventos, selecionar seus assentos e comprar ingressos de maneira rápida e segura.
+Visão Geral do Sistema
+O Ticket Innovators é uma plataforma online projetada para facilitar a compra e venda de ingressos para eventos diversos, como shows, exposições e eventos esportivos. Através de uma interface intuitiva, os usuários podem cadastrar ingressos, navegar por eventos, selecionar seus assentos e comprar ingressos de maneira rápida e segura.
 
 ## Objetivos
 
@@ -15,13 +12,12 @@ navegar por eventos, selecionar seus assentos e comprar ingressos de maneira rá
 
 
 ##Público-alvo
-- O site é destinado a pessoas que desejam comprar ingressos 
-para eventos, abrangendo todas as faixas etárias e interesses.
+- O site é destinado a pessoas que desejam comprar e vender ingressos para eventos, abrangendo todas as faixas etárias e interesses.
 
 
 ## Funcionalidades
 - Busca de Eventos: Permite aos usuários procurar eventos por categoria, data ou localização.
-- Cadastro e Venda de ingressos: Permite aos usuários comprem e cadastrem seus propios ingressos.
+- Cadastro e Venda de Ingressos: Permite aos usuários comprarem e cadastrarem seus próprios ingressos.
 - Formas integradas de pagamento: Sistema de pagamento possui varias formas de pagamento como pix,cartão,
 - dinheiro,vale presente ou cupom.
 
