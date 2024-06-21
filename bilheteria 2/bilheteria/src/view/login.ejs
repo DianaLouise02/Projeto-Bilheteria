@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket - Login</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+    <%- include('partials/header') %>
+    <div class="container">
+        <div class="logo">
+            <img src="img/logoPng.png" alt="Logo Ticket">
+        </div>
+        <form id="loginForm">
+            <h2>Login</h2>
+            <input type="email" id="email" placeholder="Insira o Email" required>
+            <input type="password" id="senha" placeholder="Senha" required max="10" min="8">
+            <button type="submit" class="btn-login">Entrar</button>
+            <p class="conta">Não tem conta? <a href="/cadastro">Cadastre-se</a></p>
+        </form>
+    </div>
+    <%- include('partials/footer') %>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+
+            if (email === 'admin123@gmail.com' && senha === 'admin') {
+                window.location.href = '/admin'; 
+                return; 
+            }
+
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, senha })
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                localStorage.clear(); 
+                localStorage.setItem('userEmail', result.email); 
+                window.location.href = result.redirectUrl;
+            } else {
+                alert(result.message);
+            }
+        });
+    </script>
+</body>
+</html>

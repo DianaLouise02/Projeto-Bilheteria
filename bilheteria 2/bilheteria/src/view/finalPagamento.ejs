@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/login.css">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('partials/headerLog') %>
+  
+<main>
+    <h1> Seu pedido foi finalizado!</h1>
+    <p> Obrigado por comprar com a Innovators Ticket! Para visualizar seu pedido, clique no ícone de "Carrinho" para checar os detalhes da sua compra. </p>
+</main>
+<%- include('partials/footer') %>
+</body>
+<style>
+    body{
+    background-color: white;
+    text-align: center;
+}
+
+
+ 
+main {
+    padding: 20px;
+}
+
+main{
+    border: 1px 1px 1px solid black;
+    display: inline-block;
+    margin: 300px ;
+    color:white;
+    width: 50%;
+    padding: 20px;
+   
+    font-size: 20px;
+    background-color:#133579;
+}
+
+h1{
+    font-size: 30px;
+}
+
+@media (max-width: 768px) {
+    main {
+        width: 70%;
+        margin: 150px auto;
+        font-size: 18px;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    main {
+        width: 90%;
+        margin: 100px auto;
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+}
+</style>
+<script>
+    const pedidoId = localStorage.getItem('pedidoSelecionado');
+    if(pedidoId) {
+        fetch(`http://localhost:3001/removerPedido/${pedidoId}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao excluir o pedido');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            location.reload(); 
+        })
+        .catch(error => console.error('Erro ao excluir o pedido:', error));
+    }
+
+</script>
+</html>

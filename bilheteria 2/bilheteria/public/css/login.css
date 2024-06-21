@@ -1,0 +1,173 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+ 
+.container {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: rgba(127,127,127,255);
+    border: 1px solid rgba(127,127,127,255);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 70px;
+    
+}
+ 
+.logo {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
+}
+ 
+.logo img {
+    width: 300px;
+    height: auto;
+
+    
+}
+ 
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+ 
+h2 {
+    margin-top: 0;
+    color: #001275;
+}
+ 
+input[type="email"], input[type="password"] {
+    width: 100%;
+    height: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+ 
+input[type="email"]:focus, input[type="password"]:focus {
+    border-color: #aaa;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+ 
+ 
+@media (max-width: 560px) {
+    .logo img{
+        width: 200px;
+        height: auto;
+    }
+}
+@media (max-width: 500px) {
+    .logo img{
+        width: 100px;
+        height: auto;
+    }
+    .menu{
+        display: inline-block;
+    }
+}
+.btn-login {
+    width: 100%;
+    height: 40px;
+    background-color:#001275;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+ 
+ 
+.conta {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+ 
+p a {
+    text-decoration: none;
+    color: rgba(0,18,117,255);
+}
+ 
+p a:hover {
+    color: white;
+}
+img{
+    width:80px;
+    height: auto;
+
+ 
+}
+.carrinho{
+width: 30px;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #133579;
+    color: white;
+    padding: 30px;
+    height: 100px;
+    
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    
+}
+
+.menu {
+    display: flex;
+    gap: 20px;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.menu a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    padding: 60px;
+    border-radius: 10px;
+}
+
+.section {
+    margin-bottom: 40px;
+}
+
+.section h2 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.section p {
+    color: #666;
+}
+
+footer {
+background-color: #333;
+color: #fff;
+text-align: center;
+padding: 20px 0;
+margin-top: 200px;
+bottom: 0;
+width: 100%;
+
+}
+.fundo{
+background-image: url(jornal,.png);
+}
+.imagem{
+width: 80px;
+}

@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f1f1;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    margin-top: 200px;
+}
+.content {
+    padding: 20px;
+}
+.options {
+    margin: 20px 0;
+}
+.option {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.option input {
+    margin-right: 10px;
+}
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+.button-container button {
+    
+        margin-top: 10px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: rgb(3, 3, 112);
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+}

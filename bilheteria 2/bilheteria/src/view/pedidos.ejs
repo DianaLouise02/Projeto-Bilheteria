@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Pedidos</title>
+    <link rel="stylesheet" href="../css/stylePi.css">
+    <style>
+       
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+    header {
+        background-color: #001275;
+        color: white;
+        padding: 1em;
+        text-align: center;
+    }
+    
+    main {
+        padding: 1em;
+        
+    }
+    
+    #order-list {
+        list-style-type: none;
+        padding: 0;
+        
+    }
+    
+    #order-list li {
+        background-color: white;
+        margin-bottom: 1em;
+        padding: 1em;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        cursor: pointer; 
+    }
+    
+    .order-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+    }
+    
+    .order-details {
+        margin-top: 0.5em;
+    }
+    
+    footer {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 20px 0;
+        margin-top: 300px;
+        bottom: 0;
+        width: 100%;
+        position: fixed;
+    }
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+ 
+.container {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color:rgba(127,127,127,255);
+    border: 1px solid rgba(127,127,127,255);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 70px;
+    
+}
+ 
+.logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+ 
+.logo img {
+    width: 300px;
+    height: auto;
+
+    ;
+}
+ 
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+ 
+h2 {
+    margin-top: 0;
+    color: #001275;
+}
+ 
+input[type="email"], input[type="password"] {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+ 
+input[type="email"]:focus, input[type="password"]:focus {
+    border-color: #aaa;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+ 
+ 
+.btn-login {
+    width: 100%;
+    height: 40px;
+    background-color:#001275;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+ 
+ 
+.conta {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+ 
+p a {
+    text-decoration: none;
+    color: rgba(0,18,117,255);
+}
+ 
+p a:hover {
+    color: white;
+}
+img{
+    width:80px;
+    height: auto;
+
+ 
+}
+.carrinho{
+width: 30px;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #133579;
+    color: white;
+    padding: 30px;
+    height: 100px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    
+}
+
+.menu {
+    display: flex;
+    gap: 20px;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.menu a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    padding: 60px;
+    border-radius: 10px;
+    
+}
+
+.section {
+    margin-bottom: 40px;
+}
+
+.section h2 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.section p {
+    color: #666;
+}
+
+footer {
+background-color: #333;
+color: #fff;
+text-align: center;
+padding: 20px 0;
+margin-top: 300px;
+bottom: 0;
+width: 100%;
+position: fixed;
+}
+.fundo{
+background-image: url(jornal,.png);
+}
+.imagem{
+width: 80px;
+}
+.main{
+    margin-bottom: 20%;
+}
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #133579;
+        color: white;
+        padding: 30px;
+        height: 100px;
+    }
+    
+    .carrinho {
+        width: 30px;
+    }
+    </style>
+</head>
+<body>
+    <%- include('partials/headerLog') %>
+    <main class="main">
+        <ul id="order-list"></ul>
+        </div>
+        
+    </main>
+    <%- include('partials/footer') %>
+    <script>
+
+document.addEventListener('DOMContentLoaded', () => {
+    const userEmail = localStorage.getItem('userEmail');
+    if (!userEmail) {
+        alert('Usuário não logado');
+        window.location.href = '/inicio';
+        return;
+    }
+
+    fetch(`http://localhost:3001/users?email=${userEmail}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro na resposta do servidor');
+            }
+            return response.json();
+        })
+        .then(user => {
+            const orderList = document.getElementById('order-list');
+            orderList.innerHTML = ''; // Limpa a lista de pedidos
+            localStorage.removeItem('pedidoSelecionado');
+
+            if (user.pedidos) {
+                user.pedidos.forEach(pedido => {
+                    const listItem = document.createElement('li');
+                    listItem.setAttribute('data-id', pedido.id); 
+                    
+                    listItem.addEventListener('click', () => {
+                        const confirmMessage = confirm('Deseja realizar o pagamento ou excluir o pedido?');
+                        if (confirmMessage) {
+                            // Redireciona para a página de pagamento
+                            window.location.href = `/opPagamento/${pedido.id}`;
+                        } else {
+                            fetch(`http://localhost:3001/removerPedido/${pedido.id}`, {
+                                method: 'DELETE'
+                            })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Erro ao excluir pedido.');
+                                }
+                                alert('Pedido excluído com sucesso.');
+                                // Atualiza a página para refletir as mudanças
+                                window.location.reload();
+                            })
+                            .catch(error => console.error('Erro ao excluir pedido:', error));
+                        }
+
+                        // Adiciona o ID do pedido clicado ao localStorage
+                        localStorage.setItem('pedidoSelecionado', pedido.id);
+                    });
+
+                    const orderHeader = document.createElement('div');
+                    orderHeader.classList.add('order-header');
+                    
+                    const orderDetails = document.createElement('div');
+                    orderDetails.classList.add('order-details');
+                    
+                    orderHeader.innerHTML = `
+                        <span>Pedido #${pedido.id}</span>
+                        <span>Quantidade: ${pedido.quantidade}</span>
+                    `;
+                    orderDetails.innerHTML = `
+                        <p><strong>Nome:</strong> ${pedido.nome}</p>
+                        <p><strong>Descrição:</strong> ${pedido.descricao}</p>
+                        <p><strong>Local:</strong> ${pedido.local}</p>
+                        <p><strong>Valor:</strong> R$${pedido.valor}</p>
+                        <p><strong>Data:</strong> ${pedido.data}</p>
+                        <p><strong>Tipo:</strong> ${pedido.tipo}</p>
+                    `;
+
+                    listItem.appendChild(orderHeader);
+                    listItem.appendChild(orderDetails);
+                    orderList.appendChild(listItem);
+                });
+            }
+        })
+        .catch(error => console.error('Erro ao buscar os pedidos:', error));
+});
+</script>

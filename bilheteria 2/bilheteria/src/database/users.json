@@ -1,0 +1,163 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "nome": "danilo",
+      "sobrenome": "Oliveira",
+      "documento": "rg",
+      "email": "danilo2006@gmail.com",
+      "nDocumento": "67897678978",
+      "genero": "masculino",
+      "senha": "123456789",
+      "telefone": "578987897",
+      "nascimento": "2002-07-10",
+      "pedidos": []
+    },
+    {
+      "id": 2,
+      "nome": "Otavio",
+      "sobrenome": "Ramos",
+      "documento": "cpf",
+      "email": "otavioRamos@gmail.com",
+      "nDocumento": "123456788",
+      "genero": "masculino",
+      "senha": "987654321",
+      "telefone": "1234645576",
+      "nascimento": "2004-06-06",
+      "pedidos": []
+    },
+    {
+      "id": 3,
+      "nome": "Mariana",
+      "sobrenome": "Santos",
+      "documento": "rg",
+      "email": "marianatoja2006@gmail.com",
+      "nDocumento": "8956574543",
+      "genero": "feminino",
+      "senha": "123456789",
+      "telefone": "11919679478",
+      "nascimento": "2006-03-26",
+      "pedidos": []
+    },
+    {
+      "id": 4,
+      "nome": "Gabriel",
+      "sobrenome": "Bernardes dos Santos",
+      "documento": "cpf",
+      "email": "biel.bernardessantos@gmail.com",
+      "nDocumento": "40128015896",
+      "genero": "masculino",
+      "senha": "Bernardes13",
+      "telefone": "11992618297",
+      "nascimento": "2001-12-13",
+      "pedidos": []
+    },
+    {
+      "id": 5,
+      "nome": "Danilo",
+      "sobrenome": "Oliveira",
+      "documento": "cpf",
+      "email": "danilo.7.oliveira2006@gmail.com",
+      "nDocumento": "47685874881",
+      "genero": "masculino",
+      "senha": "987654321",
+      "telefone": "11952442906",
+      "nascimento": "2019-12-11",
+      "pedidos": []
+    },
+    {
+      "id": 6,
+      "nome": "rodrigo",
+      "sobrenome": "santos",
+      "documento": "rg",
+      "email": "email@gmail.com",
+      "nDocumento": "47685874881",
+      "genero": "masculino",
+      "senha": "987654321",
+      "telefone": "11952442906",
+      "nascimento": "2019-12-10",
+      "pedidos": [
+        {
+          "id": 3,
+          "nome": "Pegadas do Pequeno Príncipe",
+          "descricao": "Exposição baseada no livro o pequeno príncipe!",
+          "local": "Vila Olimpía-SP",
+          "valor": "30",
+          "data": "2024-07-14",
+          "tipo": "exposição",
+          "imagem": "1718674813316-celtics.jpg",
+          "quantidade": 9
+        },
+        {
+          "id": 4,
+          "nome": "Pegadas do Pequeno Príncipe",
+          "descricao": "Exposição baseada no livro o pequeno príncipe!",
+          "local": "Vila Olimpía-SP",
+          "valor": "30",
+          "data": "2024-07-14",
+          "tipo": "exposição",
+          "imagem": "1718674813316-celtics.jpg",
+          "quantidade": 5
+        },
+        {
+          "id": 5,
+          "nome": "PodParty",
+          "descricao": "Evento que contém a presença de artistas como Kyan, MC IG e etc.",
+          "local": "São paulo-SP",
+          "valor": "75",
+          "data": "2024-06-29",
+          "tipo": "show",
+          "imagem": "podParty.jpg",
+          "quantidade": 3
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "nome": "alan",
+      "sobrenome": "santana",
+      "documento": "rg",
+      "email": "alansantana1621@gmail.com",
+      "nDocumento": "1289468923789423801475389",
+      "genero": "masculino",
+      "senha": "Cleitin96!",
+      "telefone": "11952442906",
+      "nascimento": "1987-04-21",
+      "pedidos": [
+        {
+          "id": 1,
+          "nome": "PodParty",
+          "descricao": "Evento que contém a presença de artistas como Kyan, MC IG e etc.",
+          "local": "São paulo-SP",
+          "valor": "75",
+          "data": "2024-06-29",
+          "tipo": "show",
+          "imagem": "podParty.jpg",
+          "quantidade": 74
+        },
+        {
+          "id": 2,
+          "nome": "Pegadas do Pequeno Príncipe",
+          "descricao": "Exposição baseada no livro o pequeno príncipe!",
+          "local": "Vila Olimpía-SP",
+          "valor": "30",
+          "data": "2024-07-14",
+          "tipo": "exposição",
+          "imagem": "pp.jpg",
+          "quantidade": 5
+        },
+        {
+          "id": 3,
+          "nome": "Pegadas do Pequeno Príncipe",
+          "descricao": "Exposição baseada no livro o pequeno príncipe!",
+          "local": "Vila Olimpía-SP",
+          "valor": "30",
+          "data": "2024-07-14",
+          "tipo": "exposição",
+          "imagem": "pp.jpg",
+          "quantidade": 4
+        }
+      ]
+    }
+  ]
+}

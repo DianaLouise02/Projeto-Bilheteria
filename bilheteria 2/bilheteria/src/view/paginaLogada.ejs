@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Início</title>
+    <link rel="stylesheet" href="../css/sytlePi.css">
+    <link rel="stylesheet" href="../css/styleCard.css">
+</head>
+<body>
+    <%- include('partials/headerLog') %>
+    <div class="container">
+        <div class="section" data-type="exposição">
+            <h2>Exposições</h2>
+            <p>Aqui você encontra informações sobre as últimas exposições.</p>
+        </div>
+        <div class="section" data-type="show">
+            <h2>Shows</h2>
+            <p>Aqui você encontra informações sobre os shows mais esperados.</p>
+        </div>
+        <div class="section" data-type="esporte">
+            <h2>Esportes</h2>
+            <p>Aqui você encontra informações sobre eventos esportivos.</p>
+        </div>
+    </div>
+    <div class="card-container" id="card-container"></div>
+    <footer>
+        <p>&copy; 2024 Meu Site - Todos os direitos reservados <br> <br>
+              Telefone para Contato: 11 4002-8922 <br> <br>
+              Central de Reclamações: ticketinnovatorsreclame@hotmail.com
+        </p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let tickets = [];
+
+            fetch('http://localhost:3001/tickets')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro na resposta do servidor');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Dados recebidos do servidor:', data);
+                    if (!Array.isArray(data)) {
+                        throw new Error('Formato de dados inválido');
+                    }
+                    tickets = data;
+                    displayCards(tickets);
+                })
+                .catch(error => console.error('Erro ao buscar os dados:', error));
+
+            function displayCards(filteredTickets) {
+                const cardContainer = document.getElementById('card-container');
+                cardContainer.innerHTML = '';
+
+                filteredTickets.forEach(ticket => {
+                    const card = document.createElement('div');
+                    card.classList.add('card');
+                    card.style.cursor = 'pointer';
+                    const cardContent = `
+                        <h1 class="titulo">${ticket.nome}</h1>
+                        <p class="descricao"><strong>Descrição:</strong> ${ticket.descricao}</p>
+                        <p class="local"><strong>Local:</strong> ${ticket.local}</p>
+                        <p class="valor"><strong>Valor:</strong> R$${ticket.valor}</p>
+                        <p class="data"><strong>Data:</strong> ${ticket.data}</p>
+                        <p class="tipo"><strong>Tipo:</strong> ${ticket.tipo}</p>
+                    `;
+
+                    card.innerHTML = cardContent;
+
+                    if (ticket.imagem) {
+            const img = document.createElement('img');
+            img.src = `http://localhost:3001/uploads/${ticket.imagem}`;
+            img.alt = ticket.nome;
+            img.classList.add('ticket-image');
+            img.style.width = '100%';
+            card.insertBefore(img, card.firstChild);
+            console.log('Imagem adicionada:', img);
+          }
+
+                    card.addEventListener('click', () => {
+                        if (confirm('Você deseja comprar esse ingresso?')) {
+                            const quantidade = prompt('Digite a quantidade de ingressos:');
+                            if (quantidade && !isNaN(quantidade) && quantidade > 0) {
+                                const userEmail = prompt('Digite seu email:');
+                                fetch('http://localhost:3001/addTicketToPedidos', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({ userEmail, ticketId: ticket.id, quantidade: parseInt(quantidade, 10) })
+                                })
+                                .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error('Erro ao adicionar o ingresso aos pedidos');
+                                        
+                                    }
+                                    return response.json();
+                                })
+                                .then(data => {
+                                    alert('Ingresso adicionado aos pedidos com sucesso');
+                                    console.log(data);
+                                })
+                                .catch(error => console.error('Erro ao adicionar o ingresso aos pedidos:', error));
+                            } else {
+                                alert('Quantidade inválida');
+                            }
+                        }
+                    });
+
+                    cardContainer.appendChild(card);
+                });
+            }
+
+            window.filterCards = (tipo) => {
+                const filteredTickets = tickets.filter(ticket => ticket.tipo === tipo);
+                displayCards(filteredTickets);
+            };
+
+            document.querySelectorAll('.section').forEach(section => {
+                section.addEventListener('click', () => {
+                    const tipo = section.getAttribute('data-type');
+                    filterCards(tipo);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

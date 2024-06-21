@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha o Tipo de Entrada</title>
+    <link rel="stylesheet" href="ingresso.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Escolha o Tipo de Entrada</h1>
+        <div id="ticket-options">
+            <div class="ticket-option" data-price="">
+                <h2>Meia-Entrada</h2>
+                <button class="select-button">Selecionar</button>
+            </div>
+            <div class="ticket-option" data-price="">
+                <h2>Inteira</h2>
+                <button class="select-button">Selecionar</button>
+            </div>
+            <div class="ticket-option" data-price="">
+                <h2>Pacote Família</h2>
+                <button class="select-button">Selecionar</button>
+            </div>
+        </div>
+        <div class="selected-ticket">
+            <p>Você selecionou: <span id="selectedTicket">Nenhuma entrada selecionada</span></p>
+        </div>
+        <button id="confirmButton" class="hidden">Tem certeza?</button>
+        <button id="nextButton" class="hidden">Avançar</button>
+    </div>
+    <script src="ingresso.js"></script>
+</body>
+</html>

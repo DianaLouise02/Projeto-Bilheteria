@@ -1,0 +1,98 @@
+/* style.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+  }
+  
+  .cabecalho {
+    background-color: #001f3f;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .cabecalho .banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .cabecalho .logo {
+    height: 50px;
+  }
+  
+  .cabecalho .titulo {
+    font-size: 24px;
+  }
+  
+  .container {
+    padding: 20px;
+  }
+  
+  .eventos-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .card-evento {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+  }
+  
+  .card-evento img {
+    width: 200px;
+    height: auto;
+  }
+  
+  .card-evento-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .card-evento-content h3 {
+    margin: 0;
+    font-size: 24px;
+    color: #001f3f;
+  }
+  
+  .card-evento-content p {
+    margin: 10px 0;
+    line-height: 1.6;
+  }
+  
+  .card-evento-content .info {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .card-evento-content .info div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .card-evento-content .info div img {
+    width: 20px;
+    height: auto;
+  }
+  
+  .card-evento-content .info div span {
+    font-size: 14px;
+  }
+  
+  .card-evento-content .rating {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #007bff;
+  }
+  

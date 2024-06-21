@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Usuário</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        h2 {
+            color: white;
+        }
+        .header {
+            background-color:  #6696c5;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            height: 40px;
+        
+        }
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: -75px auto 10px;
+            border: 5px solid #ffffff;
+            margin-top: 25px;
+            margin-left: 218px;
+        }
+        .info {
+            padding: 20px;
+            text-align: center;
+        }
+        .info h1 {
+            margin: 10px 0;
+            font-size: 24px;
+            color: #333333;
+        }
+        .info p {
+            margin: 5px 0;
+            color: #666666;
+            font-size: 18px;
+        }
+        .info .label {
+            font-weight: bold;
+            color: #333333;
+        }
+        .edit-btn {
+            background-color:  #6696c5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .edit-btn:hover {
+            background-color: #1c86ee;
+        }
+        .edit-form {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 20px;
+        }
+        .edit-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .edit-form button {
+            background-color: #1e90ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .edit-form button:hover {
+            background-color: #1c86ee;
+        }
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px;
+            }
+            .profile-pic {
+                width: 100px;
+                height: 100px;
+                margin: -30px auto 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <%- include('partials/headerLog') %>
+    <div style="margin-top: 100px;" id="profile-container" class="container">
+        <!-- Conteúdo do perfil será inserido aqui pelo JavaScript -->
+    </div>
+    <%- include('partials/footer') %>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const userEmail = localStorage.getItem('userEmail');
+            if (!userEmail) {
+                alert('Usuário não logado');
+                window.location.href = '/inicio';
+                return;
+            }
+
+            fetch(`/users?email=${userEmail}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro na resposta do servidor');
+                    }
+                    return response.json();
+                })
+                .then(user => {
+                    const profileContainer = document.getElementById("profile-container");
+
+                    profileContainer.innerHTML = `
+                        <div class="header">
+                            <h2>Perfil do Usuário</h2>
+                        </div>
+                        <img src="/img/user-icon.png" alt="Foto de Perfil" class="profile-pic">
+                        <div class="info">
+                            <h1>${user.nome}</h1>
+                            <p><span class="label">Sobrenome:</span> ${user.sobrenome}</p>
+                            <p><span class="label">Email:</span> ${user.email}</p>
+                            <p><span class="label">Tipo de Documento:</span> ${user.documento}</p>
+                            <p><span class="label">Número do Documento:</span> ${user.nDocumento}</p>
+                            <p><span class="label">Sexo:</span> ${user.genero}</p>
+                            <p><span class="label">Número de Telefone:</span> ${user.telefone}</p>
+                            <p><span class="label">Data de Nascimento:</span> ${user.nascimento}</p>
+                            <button class="edit-btn" onclick="showEditForm()">Editar</button>
+                            <div class="edit-form" id="edit-form">
+                                <input type="text" id="edit-nome" value="${user.nome}" placeholder="Nome">
+                                <input type="text" id="edit-sobrenome" value="${user.sobrenome}" placeholder="Sobrenome">
+                                <input type="text" id="edit-documento" value="${user.documento}" placeholder="Tipo de Documento">
+                                <input type="text" id="edit-nDocumento" value="${user.nDocumento}" placeholder="Número do Documento">
+                                <input type="text" id="edit-genero" value="${user.genero}" placeholder="Sexo">
+                                <input type="text" id="edit-telefone" value="${user.telefone}" placeholder="Número de Telefone">
+                                <input type="date" id="edit-nascimento" value="${user.nascimento}" placeholder="Data de Nascimento">
+                                <input type="password" id="edit-senha" placeholder="Nova Senha">
+                                <button onclick="updateUser('${user.email}')">Salvar</button>
+                            </div>
+                        </div>
+                    `;
+                })
+                .catch(error => console.error('Erro ao buscar os dados do usuário:', error));
+        });
+
+        function showEditForm() {
+            document.getElementById("edit-form").style.display = "flex";
+        }
+
+        function updateUser(email) {
+            const nome = document.getElementById("edit-nome").value;
+            const sobrenome = document.getElementById("edit-sobrenome").value;
+            const documento = document.getElementById("edit-documento").value;
+            const nDocumento = document.getElementById("edit-nDocumento").value;
+            const genero = document.getElementById("edit-genero").value;
+            const telefone = document.getElementById("edit-telefone").value;
+            const nascimento = document.getElementById("edit-nascimento").value;
+            const senha = document.getElementById("edit-senha").value;
+
+            fetch('/users', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email,
+                    nome,
+                    sobrenome,
+                    documento,
+                    nDocumento,
+                    genero,
+                    telefone,
+                    nascimento,
+                    senha
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao atualizar os dados do usuário');
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert('Dados atualizados com sucesso!');
+                location.reload(); 
+            })
+            .catch(error => console.error('Erro ao atualizar os dados do usuário:', error));
+        }
+    </script>
+</body>
+</html>

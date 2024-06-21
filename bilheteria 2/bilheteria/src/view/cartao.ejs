@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento com Cartão</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        main {
+            padding: 1em;
+        }
+
+        .container {
+            padding: 20px;
+            margin-top: 50px; 
+            margin-bottom: 200px; 
+            background-color: #133579;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        input, span {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #001275;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #003493;
+        }
+
+        /* Estilo para o footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            bottom: 0;
+            width: 100%;
+            position: fixed;
+        }
+    </style>
+</head>
+<body>
+    <%- include('partials/headerLog') %>
+    <main>
+        <div id="formContainer"></div>
+        <div style="height: 50px;"></div>
+    </main>
+    <%- include('partials/footer') %>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const userEmail = localStorage.getItem('userEmail');
+            if (!userEmail) {
+                alert('Usuário não logado');
+                window.location.href = '/inicio';
+                return;
+            }
+
+            fetch(`/users?email=${userEmail}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro na resposta do servidor');
+                    }
+                    return response.json();
+                })
+                .then(user => {
+                    const container = document.createElement('div');
+                    container.classList.add('container');
+
+                    const h1 = document.createElement('h1');
+                    h1.textContent = 'Pagamento com Cartão';
+
+                    const form = document.createElement('form');
+                    form.id = 'cartaoForm';
+
+                    const formGroup1 = document.createElement('div');
+                    formGroup1.classList.add('form-group');
+                    const label1 = document.createElement('label');
+                    label1.textContent = 'Nome Completo';
+                    const span1 = document.createElement('span');
+                    span1.id = 'name';
+                    span1.textContent = `${user.nome} ${user.sobrenome}`;
+                    formGroup1.appendChild(label1);
+                    formGroup1.appendChild(span1);
+
+                    const formGroup2 = document.createElement('div');
+                    formGroup2.classList.add('form-group');
+                    const label2 = document.createElement('label');
+                    label2.textContent = 'CPF';
+                    const span2 = document.createElement('span');
+                    span2.id = 'cpf';
+                    span2.textContent = user.nDocumento;
+                    formGroup2.appendChild(label2);
+                    formGroup2.appendChild(span2);
+
+                    const formGroup3 = document.createElement('div');
+                    formGroup3.classList.add('form-group');
+                    const label3 = document.createElement('label');
+                    label3.textContent = 'Número do Cartão';
+                    const input3 = document.createElement('input');
+                    input3.type = 'text';
+                    input3.id = 'cardNumber';
+                    input3.name = 'cardNumber';
+                    formGroup3.appendChild(label3);
+                    formGroup3.appendChild(input3);
+
+                    const formGroup4 = document.createElement('div');
+                    formGroup4.classList.add('form-group');
+                    const label4 = document.createElement('label');
+                    label4.textContent = 'Data de Expiração';
+                    const input4 = document.createElement('input');
+                    input4.type = 'text';
+                    input4.id = 'expirationDate';
+                    input4.name = 'expirationDate';
+                    formGroup4.appendChild(label4);
+                    formGroup4.appendChild(input4);
+
+                    const formGroup5 = document.createElement('div');
+                    formGroup5.classList.add('form-group');
+                    const label5 = document.createElement('label');
+                    label5.textContent = 'CVV';
+                    const input5 = document.createElement('input');
+                    input5.type = 'text';
+                    input5.id = 'cvv';
+                    input5.name = 'cvv';
+                    formGroup5.appendChild(label5);
+                    formGroup5.appendChild(input5);
+
+                    const formGroup6 = document.createElement('div');
+                    formGroup6.classList.add('form-group');
+                    const label6 = document.createElement('label');
+                    label6.textContent = 'Valor (R$)';
+                    const span6 = document.createElement('span');
+                    span6.id = 'amount';
+                    span6.textContent = '0'; 
+                    formGroup6.appendChild(label6);
+                    formGroup6.appendChild(span6);
+
+                    const amountDisplay = document.createElement('div');
+                    amountDisplay.id = 'amountDisplay';
+
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.textContent = 'Finalizar Pagamento';
+                    button.addEventListener('click', () => {
+                        window.location.href = '/finalPagamento';
+                    });
+
+                    form.appendChild(formGroup1);
+                    form.appendChild(formGroup2);
+                    form.appendChild(formGroup3);
+                    form.appendChild(formGroup4);
+                    form.appendChild(formGroup5);
+                    form.appendChild(formGroup6);
+                    form.appendChild(button);
+
+                    container.appendChild(h1);
+                    container.appendChild(form);
+                    container.appendChild(amountDisplay);
+
+                    document.getElementById('formContainer').appendChild(container);
+
+                    // Chamar a função para obter o valor total do pedido
+                    getPedidoInfo(span6);
+                })
+                .catch(error => {
+                    console.error('Erro ao obter informações do usuário:', error);
+                    alert('Erro ao obter informações do usuário. Por favor, tente novamente mais tarde.');
+                });
+        });
+
+        function getPedidoInfo(spanElement) {
+            const pedidoId = localStorage.getItem('pedidoSelecionado');
+
+            const amountDisplay = document.getElementById('amountDisplay');
+           
+            if (pedidoId) {
+                fetch(`http://localhost:3001/pedido/${pedidoId}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Erro ao obter informações do pedido.');
+                        }
+                        return response.json();
+                    })
+                    .then(pedido => {
+                        if (pedido) {
+                            const valorTotal = pedido.valor * pedido.quantidade;
+                            spanElement.textContent = valorTotal.toFixed(2);
+                            amountDisplay.innerHTML = `<p><strong>Valor a ser pago:</strong> R$ ${valorTotal.toFixed(2)}</p>`;
+                        } else {
+                            amountDisplay.innerHTML = '<p>Pedido não encontrado</p>';
+                        }
+                    })
+                    .catch(error => {
+                        amountDisplay.innerHTML = '<p>Ocorreu um erro ao obter as informações do pedido.</p>';
+                    });
+            } else {
+                amountDisplay.innerHTML = '<p>ID do pedido não encontrado.</p>';
+            }
+        }
+    </script>
+</body>
+</html>

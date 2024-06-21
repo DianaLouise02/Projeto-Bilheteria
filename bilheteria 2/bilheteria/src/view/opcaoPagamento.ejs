@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/login.css">
+    <title>Pagamento</title>
+</head>
+<body>
+    
+    <%- include('partials/headerLog') %>
+    <div class="container">
+        <div class="payment-option" data-payment-type="dinheiro">
+            <img src="/img/pngegg.png" alt="Dinheiro">
+            <p class="highlight-on-hover"><a href="#">Dinheiro</a></p>
+        </div>
+        <div class="payment-option" data-payment-type="cartao">
+            <img src="/img/cartao-credito.png" alt="Cartão de Crédito e Débito">
+            <p class="highlight-on-hover"><a href="#">Cartão de Crédito e Débito</a></p>
+        </div>
+        <div class="payment-option" data-payment-type="pix">
+            <img src="/img/pix.png" alt="Pix">
+            <p class="highlight-on-hover"><a href="#">Pix</a></p>
+        </div>
+    
+
+    </div>
+    <%- include('partials/footer') %>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: white;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 60px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            color: white;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 45px;
+            color:white;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            height:auto;
+            margin: 0 auto;
+            padding: 90px;
+            margin-top: 50px;
+            margin-bottom: 200px;
+            background-color: white;
+            border: 0;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            box-shadow: 1px 1px 2px 2px black;
+            padding: 20px;
+        }
+
+        .payment-option img {
+            width: 100px;
+            margin-right: 20px;
+            padding-bottom: 30px;
+            padding-top: 40px;
+        }
+
+        .payment-option p {
+            margin: 0;
+            color:black;
+            font-weight: bold;
+            margin-left: 30px;
+            font-size: 30px;
+        }
+
+        .or{
+            text-align: center;
+            margin-top: 40px;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .gift-card-container {
+            text-align: center;
+            color: black;
+        }
+
+        .gift-card {
+            width: 200px;
+        }
+
+        .gift-card-text {
+            display: inline-block;
+            vertical-align: middle;
+            color: black;
+            font-weight: bold;
+            padding-bottom: 150px;
+            font-size: 25px;
+        }
+
+        a {
+            text-decoration-line:none;
+            color:black;
+        }
+
+        .gift-card-text:hover{
+            transform: scale(1.05);
+            transition: transform 0.2s ease-in-out; 
+            cursor: pointer;
+            color: black;
+            background-color:#133579;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .highlight-on-hover:hover {
+            transform: scale(1.05);
+            transition: transform 0.2s ease-in-out;
+            cursor: pointer;
+            color: black;
+            background-color:#133579;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px;
+            }
+
+            .payment-option {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .payment-option img {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .payment-option p {
+                font-size: 24px;
+            }
+
+            .gift-card-text {
+                font-size: 20px;
+            }
+
+            .or {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+
+            .payment-option p {
+                font-size: 18px;
+            }
+
+            .gift-card-text {
+                font-size: 18px;
+            }
+
+            .or {
+                font-size: 20px;
+            }
+        }
+    </style>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+            const paymentOptions = document.querySelectorAll('.payment-option');
+
+            paymentOptions.forEach(function(option) {
+                option.addEventListener('click', function() {
+                    const paymentType = option.getAttribute('data-payment-type');
+                    if (paymentType) {
+                        // Obtém o ID do pedido do localStorage
+                        const pedidoId = localStorage.getItem('pedidoSelecionado');
+                        if (!pedidoId) {
+                            alert('ID do pedido não encontrado no localStorage.');
+                            return;
+                        }
+                        // Redireciona para a página de pagamento com o ID do pedido
+                        window.location.href = `/${paymentType}/${pedidoId}`;
+                        
+                        
+                    }
+                });
+            });
+
+            const giftCardText = document.querySelector('.gift-card-text');
+            giftCardText.addEventListener('click', function() {
+                alert('Você escolheu usar um cupom de desconto/vale presente.');
+            });
+
+    
+        }); 
+</script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+img {
+    width: 300px;
+    height: auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #133579;
+    color: white;
+    padding: 10px 30px; /* Reduzindo o padding */
+    height: auto; /* Removendo altura fixa */
+    width: 100%;
+    box-sizing: border-box; /* Garantindo que padding não aumente largura */
+}
+
+.section {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    width: 30%;
+}
+
+.section h2 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.section p {
+    color: #666;
+}
+
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.menu {
+    display: flex;
+    gap: 20px;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.menu a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-around;
+}
+
+
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    width: 300px;
+    box-sizing: border-box;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 200px;
+    bottom: 0;
+    width: 100%;
+}
+
+.fundo {
+    background-image: url(jornal.png); /* Corrigindo o nome do arquivo */
+}
+
+.imagem {
+    width: 100px;
+}
+
+.carrinho {
+    width: 30px;
+}
+
+@media screen and (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        height: auto;
+    }
+
+    .menu {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .menu a {
+        font-size: 18px;
+        margin-top: 0;
+    }
+
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .section {
+        width: 90%; 
+        text-align: center;
+    }
+
+    .card-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    header {
+        padding: 15px;
+    }
+
+    .menu a {
+        font-size: 16px;
+    }
+
+    .section h2 {
+        font-size: 22px;
+    }
+
+    .section p {
+        font-size: 16px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+}

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/stylePi.css">
+  <title>Formulário</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+    }
+    .container {
+      width: 400px;
+      margin: 50px auto;
+      background-color: #ffffff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 15%;
+    }
+    h2 {
+      color: #333333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #cccccc;
+      border-radius: 5px;
+    }
+    input[type="file"] {
+      padding: 8px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      border: none;
+      color: #ffffff;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #133579;
+      color: white;
+      padding: 30px;
+      height: 100px;
+    }
+    .menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 20px;
+      margin-top: 20px;
+      margin-right: 20px;
+    }
+    .menu a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+      width: 100%;
+      margin-top: 200px;
+      bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <%- include('partials/headerAdm') %>
+  <div class="container">
+    <h2 class="titulo">Cadastro</h2>
+    <form id="eventoForm" action="#" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="nome">Nome do evento:</label>
+        <input type="text" id="nome" name="nome" required>
+      </div>
+      <div class="form-group">
+        <label for="descricao">Descrição do evento:</label>
+        <input type="text" id="descricao" name="descricao" required>
+      </div>
+      <div class="form-group">
+        <label for="local">Local do evento:</label>
+        <input type="text" id="local" name="local" required>
+      </div>
+      <div class="form-group">
+        <label for="valor">Valor:</label>
+        <input type="number" id="valor" name="valor" step="0.01" required>
+      </div>
+      <div class="form-group">
+        <label for="data">Data:</label>
+        <input type="date" id="data" name="data" required>
+      </div>
+      <div class="form-group">
+        <label for="tipo">Tipo:</label>
+        <select id="tipo" name="tipo" required>
+          <option value="">Selecione</option>
+          <option value="show">show</option>
+          <option value="exposição">exposição</option>
+          <option value="esportes">esporte</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="imagem">Imagem do evento:</label>
+        <input type="file" id="imagem" name="imagem" accept="image/*" required>
+      </div>
+      <button type="submit">Cadastrar</button>
+    </form>
+  </div>
+  <%- include('partials/footer') %>
+</body>
+<script>
+ document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('eventoForm');
+
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Adicionando as validações aqui
+        const nome = document.getElementById('nome').value;
+        const descricao = document.getElementById('descricao').value;
+        const local = document.getElementById('local').value;
+        const valor = document.getElementById('valor').value;
+        const data = document.getElementById('data').value;
+        const imagem = document.getElementById('imagem').files[0];
+
+        if (nome.length < 3) {
+          alert('O nome do evento deve ter pelo menos 3 caracteres.');
+          return;
+        }
+
+        if (descricao.length < 10) {
+          alert('A descrição do evento deve ter pelo menos 10 caracteres.');
+          return;
+        }
+
+        if (local.length < 5) {
+          alert('O local do evento deve ter pelo menos 5 caracteres.');
+          return;
+        }
+
+        if (isNaN(valor) || valor <= 0) {
+          alert('O valor do evento deve ser um número positivo maior que zero.');
+          return;
+        }
+
+        const dataAtual = new Date().toISOString().split('T')[0];
+        if (data < dataAtual) {
+          alert('A data do evento não pode ser anterior à data atual.');
+          return;
+        }
+
+        if (!imagem) {
+          alert('Selecione uma imagem para o evento.');
+          return;
+        }
+
+        const formData = new FormData(form);
+        fetch('http://localhost:3001/tickets', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+          console.log(data);
+          alert('Dados enviados com sucesso!');
+        })
+        .catch(error => {
+          console.error('Erro ao enviar dados:', error);
+          alert('Erro ao enviar dados. Verifique o console para mais informações.');
+        });
+      });
+    });
+  </script>
+</script>
+</html>

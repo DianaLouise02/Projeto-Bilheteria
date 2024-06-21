@@ -1,0 +1,44 @@
+{
+  "tickets": [
+    {
+      "id": 1,
+      "nome": "PodParty",
+      "descricao": "Evento que contém a presença de artistas como Kyan, MC IG e etc.",
+      "local": "São paulo-SP",
+      "valor": "75",
+      "data": "2024-06-29",
+      "tipo": "show",
+      "imagem": "podParty.jpg"
+    },
+    {
+      "id": 2,
+      "nome": "Pegadas do Pequeno Príncipe",
+      "descricao": "Exposição baseada no livro o pequeno príncipe!",
+      "local": "Vila Olimpía-SP",
+      "valor": "30",
+      "data": "2024-07-14",
+      "tipo": "exposição",
+      "imagem": "pp.jpg"
+    },
+    {
+      "id": 3,
+      "nome": "NBA HOUSE",
+      "descricao": "Evento esportivo",
+      "local": "São paulo-SP",
+      "valor": "140",
+      "data": "2024-08-17",
+      "tipo": "esporte",
+      "imagem": "nba.jpg"
+    },
+    {
+      "id": 4,
+      "nome": "Champions",
+      "descricao": "Evento esportivo",
+      "local": "webley",
+      "valor": "140",
+      "data": "2025-07-10",
+      "tipo": "exposições",
+      "imagem": "1718674813316-celtics.jpg"
+    }
+  ]
+}
